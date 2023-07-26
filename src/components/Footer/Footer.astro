@@ -1,0 +1,16 @@
+<footer>
+  i am footer
+</footer>
+
+<style lang="scss">
+  @import '@styles/mixins';
+
+  footer {
+		padding-inline: 1.25em;
+		max-width: 1280px;
+
+		@include for-tablet-portrait-up {
+      padding-inline: 2.5em;
+    }
+  }
+</style>
