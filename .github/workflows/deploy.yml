@@ -17,6 +17,7 @@ jobs:
           script: |
             cd /var/www/webpage
             git pull
+            nvm use 18
             yarn
             yarn build
             
