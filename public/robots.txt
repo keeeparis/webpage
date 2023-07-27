@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seesaw.kz/sitemap-index.xml
