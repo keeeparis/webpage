@@ -17,8 +17,8 @@ jobs:
           script: |
             cd /var/www/webpage
             git pull
-            echo 'node -v'
-            echo 'npm -v'
+            node -v
+            npm -v
             nvm use 18
             yarn
             yarn build
