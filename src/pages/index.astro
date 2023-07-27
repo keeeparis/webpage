@@ -1,12 +1,79 @@
 ---
 import MainLayout from '@layouts/MainLayout.astro';
+
+const PROJECTS = [
+	{ 
+		name: 'Игра в снежки', 
+		description: `Этот бот позволяет бросаться снежками друг в друга. Для этого, добавьте его в группу,
+			нажмите команду <code>/start</code>, а дальше следуйте указаниям бота. <br/><br/> Если запутались, то можно воспользоваться командой <code>/help</code>.`, 
+		href: 'https://t.me/throw_snowball_bot' 
+	},
+	{ 
+		name: 'Сколько см?', 
+		description: `Простой бот, который раскажет всю правду о размере Вашего достоинства. <br/><br/> Добавлять его никуда не нужно, 
+			просто используйте в любом чате, начав писать сообщение с <b>@pe_size_bot</b>. Нажмите на всплывающую подсказку и вуаля!`, 
+		href: 'https://t.me/pe_size_bot' 
+	},
+];
 ---
 <MainLayout>
-	<h1>Проекты</h1>
+	<div class="projects">
+		<h1>Проекты</h1>
+		<ul>
+			{PROJECTS.map(project => (
+				<li>
+					<h2>{project.name}</h2>
+					<p set:html={project.description}></p>
+					<a href={project.href}>
+						<button>Открыть в телеграме</button>
+					</a>
+				</li>
+			))}
+
+		</ul>
+	</div>
 </MainLayout>
 
-<style lang="css">
-	h1 {
+<style lang="scss">
+	@import '@styles/mixins';
+	@import '@styles/variables';
+
+	div.projects {
 		margin-top: .5em;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5em;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+
+	li {
+		background-color: $white;
+		padding: 1.25em;
+		border-radius: 1.5em;
+
+		display: flex;
+		flex-direction: column;
+		gap: .75em;
+		
+	}	
+	button {
+		background-color: $blue;
+		border: 1px solid $gray;
+		outline: none;
+		color: $white;
+		font-size: 1em;
+		cursor: pointer;
+
+		padding: .75em 1em;
+		border-radius: 1.5em;
+		
+		@include for-phone-only {
+			width: 100%;
+		}
 	}
 </style>

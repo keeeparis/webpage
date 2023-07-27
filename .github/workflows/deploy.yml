@@ -1,0 +1,23 @@
+name: Build and Deploy
+on: 
+  push:
+    branches: [master]
+
+jobs: 
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Deploy python bot
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SSH_HOST}}
+          key: ${{secrets.SSH_KEY}}
+          username: ${{secrets.SSH_USERNAME}}
+
+          script: |
+            cd /var/www/webpage
+            git pull
+            yarn
+            yarn build
+            
+            

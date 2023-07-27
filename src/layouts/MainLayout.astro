@@ -30,12 +30,6 @@ import Header from '@components/Header/Header.astro';
 	}
   
   div.inner {
-    padding-inline: 1.25em;
-    max-width: 1280px;
-    margin-inline: auto;
-
-    @include for-tablet-portrait-up {
-      padding-inline: 2.5em;
-    }
+    @include max-width;
   }
 </style>

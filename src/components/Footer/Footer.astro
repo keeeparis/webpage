@@ -1,12 +1,22 @@
+---
+import IconInstagram from '@components/Icons/Instagram.astro';
+import IconTelegram from '@components/Icons/Telegram.astro';
+---
+
 <footer>
   <div class="inner">
-    i am footer
-
+    <a href="https://instagram.com/keeeparis" aria-label="ссылка на инстаграм @keeeparis">
+      <IconInstagram class="icon" size={28} />
+    </a>
+    <a href="https://t.me/keeeparis" aria-label="ссылка на телеграм @keeeparis">
+      <IconTelegram class="icon" size={28} />
+    </a>
   </div>
 </footer>
 
 <style lang="scss">
   @import '@styles/mixins';
+  @import '@styles/variables';
 
   footer {
     padding-top: 2em;
@@ -14,13 +24,18 @@
   }
   
   div.inner {
-    padding-inline: 1.25em;
-    max-width: 1280px;
-    margin-inline: auto;
-  
-    @include for-tablet-portrait-up {
-      padding-inline: 2.5em;
-    }
+    @include max-width;
+        
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+  }
 
+  .icon {
+    color: $black; 
+  }
+
+  a {
+    display: flex;
   }
 </style>
