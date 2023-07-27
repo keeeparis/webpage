@@ -1,18 +1,26 @@
 <footer>
-  i am footer
+  <div class="inner">
+    i am footer
+
+  </div>
 </footer>
 
 <style lang="scss">
   @import '@styles/mixins';
 
   footer {
-		padding-inline: 1.25em;
-		max-width: 1280px;
-    width: 100%;
+    padding-top: 2em;
+    padding-bottom: 1em;
+  }
+  
+  div.inner {
+    padding-inline: 1.25em;
+    max-width: 1280px;
     margin-inline: auto;
-
-		@include for-tablet-portrait-up {
+  
+    @include for-tablet-portrait-up {
       padding-inline: 2.5em;
     }
+
   }
 </style>

@@ -5,33 +5,37 @@ import Header from '@components/Header/Header.astro';
 ---
 
 <BaseLayout>
-  <main>
+  <div class="wrap">
     <Header />
-    <div>
-      <slot />
-    </div>
+    <main>
+      <div class="inner">
+        <slot />
+      </div>
+    </main>
     <Footer />
-  </main>
+  </div>
 </BaseLayout>
 
 <style lang="scss">
   @import '@styles/mixins';
 
-  main {
+  div.wrap {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
 
-  div {
-		padding-inline: 1.25em;
-		max-width: 1280px;
-    flex: 1;
-    width: 100%;
+  main {
+    flex: 1;    
+	}
+  
+  div.inner {
+    padding-inline: 1.25em;
+    max-width: 1280px;
     margin-inline: auto;
 
-		@include for-tablet-portrait-up {
-			padding-inline: 2.5em;
-		}
-	}
+    @include for-tablet-portrait-up {
+      padding-inline: 2.5em;
+    }
+  }
 </style>
