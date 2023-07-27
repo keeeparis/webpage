@@ -17,6 +17,7 @@ jobs:
           script: |
             cd /var/www/webpage
             git pull
+            source ~/.nvm/nvm.sh
             node -v
             npm -v
             nvm use 18
