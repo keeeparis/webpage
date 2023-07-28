@@ -29,7 +29,6 @@ const PROJECTS = [
 					</a>
 				</li>
 			))}
-
 		</ul>
 	</div>
 </MainLayout>
@@ -53,12 +52,17 @@ const PROJECTS = [
 
 	li {
 		background-color: $white;
-		padding: 1.25em;
+		padding: 1.5em;
 		border-radius: 1.5em;
 
 		display: flex;
 		flex-direction: column;
 		gap: .75em;
+
+		@include for-tablet-portrait-up {
+			padding: 2em;
+			gap: 1em;
+		}
 		
 	}	
 	button {
