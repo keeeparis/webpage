@@ -1,0 +1,17 @@
+---
+title: Сколько см?
+page_description: 'page_description'
+meta_description: 'Простой бот, который раскажет всю правду о размере Вашего достоинства.'
+card_description: 'Простой бот, который раскажет всю правду о размере Вашего достоинства. <br/><br/> Добавлять его никуда не нужно, 
+  просто используйте в любом чате, начав писать сообщение с <b>@pe_size_bot</b>. Нажмите на всплывающую подсказку и вуаля!'
+href: https://t.me/pe_size_bot
+date: 2023-08-17
+---
+export const Description = () => <p set:html={frontmatter.card_description} />
+export const Link = () => <a href={frontmatter.href}><button>Посмотреть в телеграме</button></a>
+
+# { frontmatter.title }
+
+<Description />
+
+<Link />

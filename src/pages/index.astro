@@ -1,40 +1,21 @@
 ---
-import MainLayout from '@layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
 
-const PROJECTS = [
-	{ 
-		name: 'Пятифакторный тест личности', 
-		description: `С помощью этого бота можно пройти известный тест на определение личности, который базирует на 5 факторах:
-		 	Открытость к опыту, Сознательность, Экстраверсия, Доброжелательность, Невротизм (эмоциональная стабильность).</br></br> 
-			После прохождения теста будут показаны результаты, информативный график, а также описания по каждому показателю.`,
-		href: 'https://t.me/five_factor_model_bot' 
-	},
-	{ 
-		name: 'Игра в снежки', 
-		description: `Этот бот позволяет бросаться снежками друг в друга. Для этого, добавьте его в группу,
-			нажмите команду <code>/start</code>, а дальше следуйте указаниям бота. <br/><br/> Если запутались, то можно воспользоваться командой <code>/help</code>.`, 
-		href: 'https://t.me/throw_snowball_bot' 
-	},
-	{ 
-		name: 'Сколько см?', 
-		description: `Простой бот, который раскажет всю правду о размере Вашего достоинства. <br/><br/> Добавлять его никуда не нужно, 
-			просто используйте в любом чате, начав писать сообщение с <b>@pe_size_bot</b>. Нажмите на всплывающую подсказку и вуаля!`, 
-		href: 'https://t.me/pe_size_bot' 
-	},
-];
+import MainLayout from '@layouts/MainLayout.astro';
+import BotCard from '@components/BotCard/BotCard.astro';
+
+const allBots = await getCollection('bot');
+const sortedCollection = allBots.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
-<MainLayout>
+<MainLayout 
+	title="Vladimir's website | @keeeparis" 
+	description="This webpage consists of various projects made by Vladimir @keeeparis. Primary focus is on programming but in near future it can be extended to include blog. I hope you can find it useful."
+> 
 	<div class="projects">
 		<h1>Проекты</h1>
 		<ul>
-			{PROJECTS.map(project => (
-				<li>
-					<h2>{project.name}</h2>
-					<p set:html={project.description}></p>
-					<a href={project.href}>
-						<button>Открыть в телеграме</button>
-					</a>
-				</li>
+			{sortedCollection.map(bot => (
+				<BotCard bot={bot} />
 			))}
 		</ul>
 	</div>
@@ -55,36 +36,5 @@ const PROJECTS = [
 		display: flex;
 		flex-direction: column;
 		gap: 1em;
-	}
-
-	li {
-		background-color: $white;
-		padding: 1.5em;
-		border-radius: 1.5em;
-
-		display: flex;
-		flex-direction: column;
-		gap: .75em;
-
-		@include for-tablet-portrait-up {
-			padding: 2em;
-			gap: 1em;
-		}
-		
-	}	
-	button {
-		background-color: $blue;
-		border: 1px solid $gray;
-		outline: none;
-		color: $white;
-		font-size: 1em;
-		cursor: pointer;
-
-		padding: .75em 1em;
-		border-radius: 1.5em;
-		
-		@include for-phone-only {
-			width: 100%;
-		}
 	}
 </style>

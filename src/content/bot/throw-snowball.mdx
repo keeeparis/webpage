@@ -1,0 +1,17 @@
+---
+title: Игра в снежки
+page_description: 'page_description'
+meta_description: 'Этот бот позволяет бросаться снежками друг в друга.'
+card_description: 'Этот бот позволяет бросаться снежками друг в друга. Для этого, добавьте его в группу,
+  нажмите команду <code>/start</code>, а дальше следуйте указаниям бота. <br/><br/> Если запутались, то можно воспользоваться командой <code>/help</code>.'
+href: https://t.me/throw_snowball_bot
+date: 2023-08-16
+---
+export const Description = () => <p set:html={frontmatter.card_description} />
+export const Link = () => <a href={frontmatter.href}><button>Посмотреть в телеграме</button></a>
+
+# { frontmatter.title }
+
+<Description />
+
+<Link />

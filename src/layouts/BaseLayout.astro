@@ -1,8 +1,14 @@
 ---
+interface Props {
+	title: string;
+	description: string;
+}
 // import '@fontsource-variable/jost';
 import '@styles/global.scss';
 const isDev = import.meta.env.DEV;
 const isProd = import.meta.env.PROD;
+
+const { title, description } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -13,9 +19,8 @@ const isProd = import.meta.env.PROD;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		
-		<title>Vladimir's website (Keeeparis)</title>
-		<meta name="description" content="This webpage consists of various projects made by Vladimir @keeeparis. Primary focus is on programming but in near future it can be extended to include blog. I hope you can find it useful.">
-		
+		<title>{title}</title>
+		<meta name="description" content={description}>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
