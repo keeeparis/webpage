@@ -12,6 +12,19 @@ const botCollection = defineCollection({
   })
 });
 
+const blogCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    page_description: z.string(),
+    card_description: z.string(),
+    meta_description: z.string(),
+    href: z.string(),
+    date: z.date()
+  })
+});
+
 export const collections = {
-  'bot': botCollection
-}
+  bot: botCollection,
+  blog: blogCollection
+};

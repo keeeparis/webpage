@@ -5,7 +5,7 @@ import MainLayout from '@layouts/MainLayout.astro';
 import BotCard from '@components/BotCard/BotCard.astro';
 
 const allBots = await getCollection('bot');
-const sortedCollection = allBots.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+const sortedCollection = allBots.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 <MainLayout 
 	title="Vladimir's website | @keeeparis" 

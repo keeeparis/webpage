@@ -1,4 +1,6 @@
 ---
+import {ViewTransitions} from 'astro:transitions';
+
 interface Props {
 	title: string;
 	description: string;
@@ -8,7 +10,7 @@ import '@styles/global.scss';
 const isDev = import.meta.env.DEV;
 const isProd = import.meta.env.PROD;
 
-const { title, description } = Astro.props
+const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -34,6 +36,8 @@ const { title, description } = Astro.props
 			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 			})(window,document,'script','dataLayer', 'GTM-MPFN8GL');</script>)}
 			<!-- End Google Tag Manager -->
+
+		<ViewTransitions />
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->

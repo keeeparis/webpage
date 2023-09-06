@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
 import MainLayout from '@layouts/MainLayout.astro';
-import { addPostfix } from '@utils/utils'
+import { addPostfix } from '@utils/utils';
 
 export async function getStaticPaths() {
   const botEntries = await getCollection('bot');

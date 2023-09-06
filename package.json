@@ -11,18 +11,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.19.7",
-    "@astrojs/sitemap": "^2.0.1",
-    "@fontsource-variable/jost": "^5.0.6",
-    "astro": "^2.9.2",
+    "@astrojs/mdx": "^1.0.0",
+    "@astrojs/sitemap": "^3.0.0",
+    "@fontsource-variable/jost": "^5.0.9",
+    "astro": "^3.0.8",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^6.2.0",
-    "eslint": "^8.45.0",
-    "eslint-plugin-astro": "^0.27.2",
-    "prettier": "^3.0.0",
-    "prettier-plugin-astro": "^0.11.0",
-    "sass": "^1.64.1"
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^8.48.0",
+    "eslint-plugin-astro": "^0.29.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-astro": "^0.12.0",
+    "sass": "^1.66.1",
+    "typescript": "^5.2.2"
   }
 }

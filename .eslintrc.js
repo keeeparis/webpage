@@ -1,5 +1,4 @@
-module.exports = {
-  // ...
+const exports = {
   extends: [
     // ...
     'plugin:astro/all' // /recommended
@@ -19,8 +18,10 @@ module.exports = {
       },
       rules: {
         // override/add rules settings here, such as:
-        'astro/no-set-html-directive': '0'
+        'astro/no-set-html-directive': 0
       }
     }
   ]
 };
+
+export default exports;
