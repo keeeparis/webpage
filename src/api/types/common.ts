@@ -3,7 +3,7 @@ export interface MainImage {
     id: number;
     attributes: {
       name: string;
-      caption: string;
+      caption?: string;
       width: number;
       height: number;
       formats: {
