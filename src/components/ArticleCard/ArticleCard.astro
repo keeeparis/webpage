@@ -10,8 +10,6 @@ interface Props {
 
 const { article: { id, attributes } } = Astro.props;
 const articleUrl = `/blog/${attributes.slug}`
-
-console.log(attributes)
 ---
 
 <li>

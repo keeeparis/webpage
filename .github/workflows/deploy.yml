@@ -16,6 +16,7 @@ jobs:
 
           script: |
             cd /var/www/seesaw-front
+            git reset --hard
             git pull
             source ~/.nvm/nvm.sh
             yarn
