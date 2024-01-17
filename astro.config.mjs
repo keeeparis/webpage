@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 
-import sitemap from "@astrojs/sitemap";
+// import sitemap from "@astrojs/sitemap";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 
@@ -8,7 +8,7 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: "https://seesaw.kz",
   scopedStyleStrategy: "class",
-  integrations: [sitemap(), react()],
+  integrations: [react()],
   output: "hybrid", // server
   image: {
     domains: [""]

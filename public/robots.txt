@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://seesaw.kz/sitemap-index.xml
+Sitemap: https://seesaw.kz/sitemap
