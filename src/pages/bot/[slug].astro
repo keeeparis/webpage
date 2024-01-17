@@ -1,0 +1,96 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import RichText from '@components/RichText';
+
+import fetchApi from '@api/index';
+import type Bot from '@api/types/bot';
+
+// for STATIC pages
+// export async function getStaticPaths() {
+// 	const bots = await fetchApi<Bot[]>({
+// 		endpoint: 'bots?populate=*', // the content type to fetch
+// 		wrappedByKey: 'data', // the key to unwrap the response
+// 	});
+
+// 	return bots.map((bot) => ({
+//     params: { slug: bot.attributes.slug },
+//     props: bot,
+//   }));
+// }
+// type Props = Bot;
+// const bot = Astro.props;
+
+// for SSR pages
+export const prerender = false;
+const { slug } = Astro.params;
+
+const bot = await fetchApi<Bot | undefined>({
+	endpoint: `/bots/slug/${slug}`,
+	wrappedByKey: 'data',
+	query: {
+		'populate': '*'
+	},
+});
+
+if (!bot) {
+	return Astro.redirect('/404');
+}
+
+const postfix = '| Телеграм Бот | @keeeparis';
+---
+
+<MainLayout 
+	title={`${bot.attributes.title} ${postfix}`} 
+	description={`${bot.attributes.description} ${postfix}`}
+>
+  <div class="main">
+		<h1>{bot.attributes.title}</h1>
+
+		<RichText content={bot.attributes.rich_text} />
+
+		<a href={bot.attributes.url}>
+			<button>Посмотреть в телеграме</button>
+		</a>
+  </div>
+</MainLayout>
+
+<style lang="scss" is:global>
+  @import '@styles/mixins';
+	@import '@styles/variables';
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+
+    padding: 1.5em;
+		border-radius: 1.5em;
+    background-color: $white;
+
+		@include for-tablet-portrait-up {
+			padding: 2em;
+			gap: 1.75em;
+		}
+  }
+
+	.actions {
+		display: flex;
+		gap: 1em;
+	}
+
+  button {
+		background-color: $blue;
+		border: 1px solid $gray;
+		outline: none;
+		color: $white;
+		font-size: 1em;
+		cursor: pointer;
+
+		padding: .75em 1em;
+		border-radius: 1.5em;
+		
+		@include for-phone-only {
+			width: 100%;
+		}
+	}
+</style>

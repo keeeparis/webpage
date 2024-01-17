@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+
+import MainLayout from '@layouts/MainLayout.astro';
+import RichText from '@components/RichText';
+import config from '@config';
+import fetchApi from '@api/index';
+import type Article from '@api/types/article';
+
+// for STATIC pages
+// export async function getStaticPaths() {
+// 	const bots = await fetchApi<Bot[]>({
+// 		endpoint: 'bots?populate=*', // the content type to fetch
+// 		wrappedByKey: 'data', // the key to unwrap the response
+// 	});
+
+// 	return bots.map((bot) => ({
+//     params: { slug: bot.attributes.slug },
+//     props: bot,
+//   }));
+// }
+// type Props = Bot;
+// const bot = Astro.props;
+
+// for SSR pages
+export const prerender = false;
+const { slug } = Astro.params;
+
+const article = await fetchApi<Article | undefined>({
+	endpoint: `/articles/slug/${slug}`,
+	wrappedByKey: 'data',
+	query: {
+		'populate': '*'
+	},
+});
+
+if (!article) {
+	return Astro.redirect('/404');
+}
+
+const { attributes } = article
+
+const postfix = '| Блог | @keeeparis';
+---
+
+<MainLayout 
+	title={`${attributes.title} ${postfix}`} 
+	description={`${attributes.description} ${postfix}`}
+>
+  <div class="main">
+		<h1>{attributes.title}</h1>
+
+    {attributes.main_image && attributes.main_image.data && (
+      <div class="image">
+        <Image
+          src={`${config.API_URL}${attributes.main_image?.data.attributes.url}`} 
+          width={attributes.main_image.data.attributes.width}
+          height={attributes.main_image.data.attributes.height} 
+          alt={attributes.main_image.data.attributes.caption} 				
+          widths={[240, attributes.main_image.data.attributes.width]}
+          sizes={`(max-width: 400px) 240px, ${attributes.main_image.data.attributes.width}px`}
+        />
+      </div>
+    )}
+
+		<RichText content={article.attributes.rich_text} />
+  </div>
+</MainLayout>
+
+<style lang="scss" is:global>
+  @import '@styles/mixins';
+	@import '@styles/variables';
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+
+    padding: 1.5em;
+		border-radius: 1.5em;
+    background-color: $white;
+
+		@include for-tablet-portrait-up {
+			padding: 2em;
+			gap: 1.75em;
+		}
+  }
+
+  .image {
+    display: flex;
+		
+		img {
+			object-fit: contain;
+			width: 100%;
+			height: auto;
+		}
+	}
+</style>

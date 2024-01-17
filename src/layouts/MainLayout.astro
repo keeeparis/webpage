@@ -1,25 +1,36 @@
 ---
+import BaseLayout from './BaseLayout.astro';
+import Footer from '@components/Footer/Footer.astro';
+import Header from '@components/Header/Header.astro';
+
+import fetchApi from '@api/index';
+import type Global from '@api/types/global';
+
 interface Props {
 	title: string;
 	description: string;
 }
 
-import BaseLayout from './BaseLayout.astro';
-import Footer from '@components/Footer/Footer.astro';
-import Header from '@components/Header/Header.astro';
-
 const { title, description } = Astro.props;
+
+const global = await fetchApi<Global>({
+  endpoint: 'global', 
+  wrappedByKey: 'data',
+  query: {
+    populate: '*'
+  } 
+});
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="wrap">
-    <Header />
-    <main>
-      <div class="inner">
-        <slot />
-      </div>
-    </main>
-    <Footer />
+    <Header content={global.attributes.header} />
+      <main>
+        <div class="inner">
+          <slot />
+        </div>
+      </main>
+    <Footer content={global.attributes.footer} />
   </div>
 </BaseLayout>
 
@@ -33,10 +44,10 @@ const { title, description } = Astro.props;
   }
 
   main {
-    flex: 1;    
+    flex: 1;
 	}
   
   div.inner {
-    @include max-width;
+    @include container;
   }
 </style>

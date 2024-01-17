@@ -1,25 +1,30 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-
+import type Bot from '@api/types/bot';
 import ArrowRight from '@components/Icons/ArrowRight.astro';
+
 interface Props {
-  bot: CollectionEntry<'bot'>
+  bot: Bot
 }
 
-const { bot } = Astro.props;
+const { bot: { id, attributes } } = Astro.props;
 ---
 
 <li>
   <h2>
-		<a href=`/bot/${bot.slug}`>
-			{bot.data.title}
+		<a href=`/bot/${attributes.slug}`>
+			{attributes.title}
 			<ArrowRight class="icon" />
 		</a>
 	</h2>
-  <p set:html={bot.data.card_description}></p>
-  <a href={bot.data.href}>
-    <button>Открыть в телеграме</button>
-  </a>
+  <p set:html={attributes.description}></p>
+	<div class="actions">
+		<a href=`/bot/${attributes.slug}`>
+			<button class="outline">Подробнее</button>
+		</a>		
+		<a href={attributes.url}>
+			<button class="primary">Открыть в телеграме</button>
+		</a>
+	</div>
 </li>
 
 <style lang="scss">
@@ -39,28 +44,46 @@ const { bot } = Astro.props;
 			padding: 2em;
 			gap: 1em;
 		}
-		
 	}	
+
+	.actions {
+		display: flex;
+		flex-direction: column;
+		gap: .5em;
+
+		@include for-tablet-portrait-up {
+			flex-direction: row;
+		}
+
+	}
+
 	button {
-		background-color: $blue;
-		border: 1px solid $gray;
 		outline: none;
-		color: $white;
 		font-size: 1em;
 		cursor: pointer;
-
+		
 		padding: .75em 1em;
 		border-radius: 1.5em;
 		
 		@include for-phone-only {
 			width: 100%;
 		}
+		
+		&.outline {
+			color: $blue;
+			background-color: $white;
+			border: 1px solid $blue;
+		}
+		&.primary {
+			color: $white;
+			background-color: $blue;
+			border: 1px solid $gray;
+		}
 	}
 
-	a {
+	h2 a {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
 
 		&:hover {
 			@include for-tablet-portrait-up {

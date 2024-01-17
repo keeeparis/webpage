@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+
+import type Article from '@api/types/article';
+import config from '@config';
+
+interface Props {
+  article: Article
+}
+
+const { article: { id, attributes } } = Astro.props;
+const articleUrl = `/blog/${attributes.slug}`
+
+console.log(attributes)
+---
+
+<li>
+  <h2>
+		<a href={articleUrl}>
+			{attributes.title}
+		</a>
+	</h2>
+	{attributes.main_image && attributes.main_image.data && (
+		<a href={articleUrl} class="image">
+			<Image
+				src={`${config.API_URL}${attributes.main_image?.data.attributes.url}`} 
+				width={attributes.main_image.data.attributes.width}
+				height={attributes.main_image.data.attributes.height} 
+				alt={attributes.main_image.data.attributes.caption} 				
+				widths={[240, attributes.main_image.data.attributes.width]}
+  			sizes={`(max-width: 400px) 240px, ${attributes.main_image.data.attributes.width}px`}
+			/>
+		</a>
+	)}
+  <p>{attributes.description}</p>
+	<div class="actions">
+		<a href={articleUrl}>
+			<button class="primary">Читать далее</button>
+		</a>		
+	</div>
+</li>
+
+<style lang="scss">
+  @import '@styles/mixins';
+	@import '@styles/variables';
+
+  li {
+		background-color: $white;
+		padding: 1.5em;
+		border-radius: 1.5em;
+
+		display: flex;
+		flex-direction: column;
+		gap: .75em;
+
+		@include for-tablet-portrait-up {
+			padding: 2em;
+			gap: 1em;
+		}
+	}	
+
+	.image {
+		@include for-tablet-portrait-up {
+			display: flex;
+			max-height: 400px;
+		}
+		
+		img {
+			object-fit: contain;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	.actions {
+		display: flex;
+		flex-direction: column;
+		gap: .5em;
+
+		@include for-tablet-portrait-up {
+			flex-direction: row;
+		}
+	}
+
+	button {
+		outline: none;
+		font-size: 1em;
+		cursor: pointer;
+		
+		padding: .75em 1em;
+		border-radius: 1.5em;
+		
+		@include for-phone-only {
+			width: 100%;
+		}
+		
+		&.outline {
+			color: $blue;
+			background-color: $white;
+			border: 1px solid $blue;
+		}
+		&.primary {
+			color: $white;
+			background-color: $blue;
+			border: 1px solid $gray;
+		}
+	}
+
+	h2 a {
+		display: flex;
+		justify-content: space-between;
+
+		&:hover {
+			@include for-tablet-portrait-up {
+				text-decoration: underline;
+			}
+		}
+	}
+</style>

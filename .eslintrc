@@ -1,27 +1,26 @@
-const exports = {
-  extends: [
+{
+  "extends": [
     // ...
-    'plugin:astro/all' // /recommended
+    "plugin:astro/recommended" // /recommended
   ],
-  // ...
-  overrides: [
+  "overrides": [
     {
       // Define the configuration for `.astro` file.
-      files: ['*.astro'],
+      "files": ["*.astro"],
       // Allows Astro components to be parsed.
-      parser: 'astro-eslint-parser',
+      "parser": "astro-eslint-parser",
       // Parse the script in `.astro` as TypeScript by adding the following configuration.
       // It's the setting you need when using TypeScript.
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.astro']
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"]
       },
-      rules: {
+      "rules": {
         // override/add rules settings here, such as:
-        'astro/no-set-html-directive': 0
+        "astro/no-set-html-directive": 0
       }
     }
   ]
-};
+}
 
-export default exports;
+// export default exports;

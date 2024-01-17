@@ -1,0 +1,43 @@
+---
+import MainLayout from '@layouts/MainLayout.astro';
+import ArticleCard from '@components/ArticleCard/ArticleCard.astro';
+
+import fetchApi from '@api/index';
+import type Article from '@api/types/article';
+
+const articles = await fetchApi<Article[]>({
+  endpoint: 'articles', 
+  wrappedByKey: 'data',
+	query: {
+		populate: '*'
+	}
+});
+
+---
+
+<MainLayout title='Блог | @keeeparis' description='Мысли и идеи | @keeeparis'>
+	<div class="blog">
+		<h1>Блог</h1>
+		<ul>
+			{articles.map(article => (
+				<ArticleCard article={article} />
+			))}
+		</ul>
+	</div>
+</MainLayout>
+
+<style lang="scss">
+	div.blog {
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+
+</style>

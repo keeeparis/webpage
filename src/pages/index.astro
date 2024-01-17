@@ -1,11 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
-
 import MainLayout from '@layouts/MainLayout.astro';
 import BotCard from '@components/BotCard/BotCard.astro';
 
-const allBots = await getCollection('bot');
-const sortedCollection = allBots.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+import fetchApi from '@api/index';
+import type Bot from '@api/types/bot';
+
+
+const bots = await fetchApi<Bot[]>({
+  endpoint: 'bots?populate=*', 
+  wrappedByKey: 'data',
+});
+
 ---
 <MainLayout 
 	title="Vladimir's website | @keeeparis" 
@@ -14,7 +19,7 @@ const sortedCollection = allBots.sort((a, b) => b.data.date.getTime() - a.data.d
 	<div class="projects">
 		<h1>Проекты</h1>
 		<ul>
-			{sortedCollection.map(bot => (
+			{bots.map(bot => (
 				<BotCard bot={bot} />
 			))}
 		</ul>

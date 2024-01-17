@@ -1,14 +1,22 @@
 ---
 import IconInstagram from '@components/Icons/Instagram.astro';
 import IconTelegram from '@components/Icons/Telegram.astro';
+
+import type Global from '@api/types/global';
+
+interface Props {
+	content: Global['attributes']['footer'];
+}
+
+const { content } = Astro.props;
 ---
 
 <footer>
   <div class="inner">
-    <a href="https://instagram.com/keeeparis" aria-label="ссылка на инстаграм @keeeparis">
+    <a href={content.instagram} aria-label="ссылка на инстаграм @keeeparis">
       <IconInstagram class="icon" size={28} />
     </a>
-    <a href="https://t.me/keeeparis" aria-label="ссылка на телеграм @keeeparis">
+    <a href={content.telegram} aria-label="ссылка на телеграм @keeeparis">
       <IconTelegram class="icon" size={28} />
     </a>
   </div>
@@ -24,7 +32,7 @@ import IconTelegram from '@components/Icons/Telegram.astro';
   }
   
   div.inner {
-    @include max-width;
+    @include container;
         
     display: flex;
     justify-content: center;

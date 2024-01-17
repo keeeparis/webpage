@@ -1,3 +1,13 @@
+---
+import type Global from '@api/types/global';
+
+interface Props {
+	content: Global['attributes']['header'];
+}
+
+const { content } = Astro.props;
+---
+
 <header>
   <nav>
     <a href="/">
@@ -23,7 +33,7 @@
   }
   
   nav {
-    @include max-width;
+    @include container;
     display: flex;
     justify-content: space-between;
   }

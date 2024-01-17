@@ -15,7 +15,7 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
 
           script: |
-            cd /var/www/webpage
+            cd /var/www/seesaw-front
             git pull
             source ~/.nvm/nvm.sh
             yarn

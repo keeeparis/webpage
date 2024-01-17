@@ -1,0 +1,11 @@
+@import '@styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.link {
+  color: $blue;
+}
