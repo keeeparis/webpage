@@ -56,7 +56,7 @@ const postfix = '| Блог | @keeeparis';
           src={`${config.API_URL}${attributes.main_image?.data.attributes.url}`} 
           width={attributes.main_image.data.attributes.width}
           height={attributes.main_image.data.attributes.height} 
-          alt={attributes.main_image.data.attributes.caption} 				
+          alt={attributes.main_image.data.attributes.caption ?? 'Main image of the article'} 				
           widths={[240, attributes.main_image.data.attributes.width]}
           sizes={`(max-width: 400px) 240px, ${attributes.main_image.data.attributes.width}px`}
         />
