@@ -9,7 +9,9 @@ module.exports = {
       // ignore_watch: ['node_modules'],
       // restart_delay: 10_000,
       env: {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        HOST: "127.0.0.1",
+        PORT: 3000
       }
     }
   ]
