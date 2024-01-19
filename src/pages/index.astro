@@ -5,10 +5,13 @@ import BotCard from '@components/BotCard/BotCard.astro';
 import fetchApi from '@api/index';
 import type Bot from '@api/types/bot';
 
-
+export const prerender = false;
 const bots = await fetchApi<Bot[]>({
   endpoint: 'bots?populate=*', 
   wrappedByKey: 'data',
+	query: {
+		sort: 'publishedAt:desc'
+	}
 });
 
 ---

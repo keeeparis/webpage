@@ -5,11 +5,13 @@ import ArticleCard from '@components/ArticleCard/ArticleCard.astro';
 import fetchApi from '@api/index';
 import type Article from '@api/types/article';
 
+export const prerender = false;
 const articles = await fetchApi<Article[]>({
   endpoint: 'articles', 
   wrappedByKey: 'data',
 	query: {
-		populate: '*'
+		populate: '*',
+		sort: 'publishedAt:desc'
 	}
 });
 
