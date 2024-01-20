@@ -1,11 +1,44 @@
 @import '@styles/variables';
+@import '@styles/mixins';
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 1.5em;
 }
 
 .link {
   color: $blue;
+}
+
+.ul {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+
+  & li {
+    list-style-type: disc;
+    font-size: 1.125rem;
+
+    @include for-tablet-portrait-up {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.ol {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+
+  & li {
+    font-size: 1.125rem;
+
+    @include for-tablet-portrait-up {
+      font-size: 1.25rem;
+    }
+  }
+
 }
