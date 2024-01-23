@@ -9,9 +9,10 @@ import type Global from '@api/types/global';
 interface Props {
 	title: string;
 	description: string;
+  innerClass?: string
 }
 
-const { title, description } = Astro.props;
+const { title, description, innerClass = 'inner' } = Astro.props;
 
 const global = await fetchApi<Global>({
   endpoint: 'global', 
@@ -26,7 +27,7 @@ const global = await fetchApi<Global>({
   <div class="wrap">
     <Header content={global.attributes.header} />
       <main>
-        <div class="inner">
+        <div class={innerClass}>
           <slot />
         </div>
       </main>
@@ -48,6 +49,6 @@ const global = await fetchApi<Global>({
 	}
   
   div.inner {
-    @include container(0em);
+    @include container;
   }
 </style>

@@ -46,6 +46,7 @@ const postfix = '| Блог | @keeeparis';
 <MainLayout 
 	title={`${attributes.title} ${postfix}`} 
 	description={`${attributes.description} ${postfix}`}
+  innerClass='container'
 >
   <div class="main">
 		<h1>{attributes.title}</h1>
@@ -84,6 +85,10 @@ const postfix = '| Блог | @keeeparis';
 			padding: 2em;
 			gap: 1.75em;
 		}
+  }
+
+  .container {
+    @include container(0em);
   }
 
   .image {
