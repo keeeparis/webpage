@@ -24,12 +24,12 @@
   }
 }
 
-@mixin container {
+@mixin container($p-m: 1.25em, $p-d: 2.5em) {
   max-width: 970px;
   margin-inline: auto;
-  padding-inline: 1.25em;
+  padding-inline: $p-m;
 
   @include for-tablet-portrait-up {
-    padding-inline: 2.5em;
+    padding-inline: $p-d;
   }
 }
